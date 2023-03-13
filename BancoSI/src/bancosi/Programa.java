@@ -28,7 +28,7 @@ public class Programa {
         System.out.println("Digite um valor para transferencia entre contas: ");
         minhaConta.transfere(outraConta, entrada.nextDouble());
         
-        System.out.println("Saldo C1: "+minhaConta.saldo);
-        System.out.println("Saldo C2: "+outraConta.saldo);   
+        System.out.println("Saldo C1: "+minhaConta.getSaldo());
+        System.out.println("Saldo C2: "+outraConta.getSaldo());   
     }
 }
