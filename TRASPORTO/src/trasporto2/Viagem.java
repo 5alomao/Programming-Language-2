@@ -1,4 +1,4 @@
-package trasporto;
+package trasporto2;
 
 public class Viagem {
     private String destino;
