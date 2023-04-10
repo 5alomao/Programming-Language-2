@@ -11,7 +11,7 @@ package bancosi;
  */
 public class TesteCliente {
      public static void main(String[] args) {
-        Conta c1 = new Conta();
+        Conta c1 = new ContaPoupanca();
         Cliente cli1 = new Cliente();
         c1.objCliente = cli1;
         c1.objCliente.setNome("Paola Dias");

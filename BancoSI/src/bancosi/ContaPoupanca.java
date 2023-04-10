@@ -1,12 +1,8 @@
 package bancosi;
 
 public class ContaPoupanca extends Conta {
-    
-    @Override
-    void atualiza(double taxa){ 
-        deposita(this.getSaldo() * taxa * 3);
-    }
 
-    
-    
+    void atualiza(double taxa) {
+        super.deposita(this.getSaldo() * taxa * 3);
+    }
 }

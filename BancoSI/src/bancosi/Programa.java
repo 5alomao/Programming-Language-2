@@ -16,8 +16,8 @@ public class Programa {
         
         Scanner entrada = new Scanner(System.in);
         
-        Conta minhaConta = new Conta();
-        Conta outraConta = new Conta();
+        Conta minhaConta = new ContaCorrente();
+        Conta outraConta = new ContaPoupanca();
                 
         System.out.println("Digite um valor para depósito:");
         minhaConta.deposita(entrada.nextDouble());

@@ -2,7 +2,7 @@ package bancosi;
 
 public class TestaConta {
     public static void main(String[] args) {
-        Conta c = new Conta();
+        Conta c = new ContaCorrente();
         ContaCorrente cc = new ContaCorrente();
         ContaPoupanca cp = new ContaPoupanca();
         

@@ -1,6 +1,6 @@
 package bancosi;
 
-public class Conta {
+abstract public class Conta {
     Cliente objCliente;
     private double saldo;
     private double limite;
@@ -77,7 +77,6 @@ public class Conta {
         }
     }
     
-    void atualiza(double taxa){
-        this.saldo += this.saldo * taxa;
-    }
+    abstract void atualiza(double taxa);
+    
 }
