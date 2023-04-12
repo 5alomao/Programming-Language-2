@@ -1,6 +1,6 @@
 package bancosi;
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements Tributavel {
     
     @Override
     void atualiza(double taxa){ 
@@ -10,6 +10,11 @@ public class ContaCorrente extends Conta {
     @Override
     void deposita(double saldo) {
         super.deposita(saldo-1); 
+    }
+
+    @Override
+    public double calculaTributos() {
+        return this.getSaldo()*0.01;
     }
     
     
