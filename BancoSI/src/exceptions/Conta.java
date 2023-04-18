@@ -51,8 +51,11 @@ abstract public class Conta {
     }
     
     void deposita(double saldo){ // método
-        this.saldo = this.saldo +saldo;
-        System.out.println("Deposito efetuado com sucesso");
+        if(saldo < 0){
+            throw new IllegalArgumentException();
+        }else{
+            this.saldo += saldo -0.10;
+        }
     }
     
     boolean saca(double saldo){ //método
