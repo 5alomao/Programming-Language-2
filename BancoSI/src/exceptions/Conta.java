@@ -52,7 +52,7 @@ abstract public class Conta {
     
     void deposita(double saldo){ // método
         if(saldo < 0){
-            throw new ValorInvalidoException("Você tentou depositar um valor Negativo"); //passando via construtor a mensagem a ser exibida
+            throw new ValorInvalidoException(saldo);
         }else{
             this.saldo += saldo -0.10;
         }
