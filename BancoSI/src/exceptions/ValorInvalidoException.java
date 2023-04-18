@@ -7,5 +7,8 @@ public class ValorInvalidoExceptions extends RuntimeException {
   melhor ainda utilizarmos IllegalArgumentException. A boa prática diz que devemos preferir usar as já existentes do
   Java sempre que possível.
   */  
-
+  
+  ValorInvalidoExceptions(double saldo){
+    super("Valor Invalido:"+saldo);
+  }
 }
