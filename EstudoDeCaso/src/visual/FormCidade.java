@@ -30,8 +30,8 @@ public class FormCidade extends javax.swing.JDialog {
 
         painelNavegacao = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
-        btnAnterior = new javax.swing.JButton();
         btnProximo = new javax.swing.JButton();
+        btnAnterior = new javax.swing.JButton();
         btnUltimo = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
         painelAbas = new javax.swing.JTabbedPane();
@@ -44,16 +44,16 @@ public class FormCidade extends javax.swing.JDialog {
         setTitle("Cadastro de Cidade");
 
         painelNavegacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegação"));
-        painelNavegacao.setLayout(new java.awt.GridLayout());
+        painelNavegacao.setLayout(new java.awt.GridLayout(1, 0));
 
         btnPrimeiro.setText("Primeiro");
         painelNavegacao.add(btnPrimeiro);
 
-        btnAnterior.setText("Anterior");
-        painelNavegacao.add(btnAnterior);
-
         btnProximo.setText("Próximo");
         painelNavegacao.add(btnProximo);
+
+        btnAnterior.setText("Anterior");
+        painelNavegacao.add(btnAnterior);
 
         btnUltimo.setText("Último");
         painelNavegacao.add(btnUltimo);
@@ -89,11 +89,11 @@ public class FormCidade extends javax.swing.JDialog {
         abaDados.setLayout(abaDadosLayout);
         abaDadosLayout.setHorizontalGroup(
             abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         abaDadosLayout.setVerticalGroup(
             abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 418, Short.MAX_VALUE)
         );
 
         painelAbas.addTab("Dados", abaDados);
@@ -115,7 +115,7 @@ public class FormCidade extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(painelNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(painelAbas)
+                .addComponent(painelAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
