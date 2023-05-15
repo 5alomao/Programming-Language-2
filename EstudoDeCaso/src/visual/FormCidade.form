@@ -156,14 +156,17 @@
                       <Subbinding sourcePath="${codigoCidade}">
                         <BindingParameter name="NAME" value="C&#xf3;digo"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${nomeCidade}">
                         <BindingParameter name="NAME" value="Nome"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${ufCidade}">
                         <BindingParameter name="NAME" value="UF"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                     </BindingProperty>
                   </BindingProperties>
@@ -305,8 +308,18 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="tblCidade" sourcePath="${selectedElement.codigoCidade}" target="txtCodigo" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNome">
+              <BindingProperties>
+                <BindingProperty name="text" source="tblCidade" sourcePath="${selectedElement.nomeCidade}" target="txtNome" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbxUF">
               <Properties>
@@ -342,6 +355,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="selectedItem" source="tblCidade" sourcePath="${selectedElement.ufCidade}" target="cbxUF" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

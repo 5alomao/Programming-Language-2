@@ -7,21 +7,32 @@ package visual;
 
 import java.util.ArrayList;
 import modelo.Cidade;
+import modelo.DAOCidade;
 
 /**
  *
  * @author 17413319608
  */
 public class FormCidade extends javax.swing.JDialog {
-
+    DAOCidade objDAOCidade = new DAOCidade();
     /**
      * Creates new form FormCidade
      */
     public FormCidade(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        atualizaTabela();
     }
-
+    
+    public void atualizaTabela(){
+        listCidade.clear();
+        listCidade.addAll(objDAOCidade.getLista());
+        int linha = listCidade.size()-1;
+        if(linha>=0){
+            tblCidade.setRowSelectionInterval(linha, linha);
+            tblCidade.scrollRectToVisible(tblCidade.getCellRect(linha, linha, true));
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,12 +101,15 @@ public class FormCidade extends javax.swing.JDialog {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigoCidade}"));
         columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeCidade}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ufCidade}"));
         columnBinding.setColumnName("UF");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(tblCidade);
@@ -130,7 +144,16 @@ public class FormCidade extends javax.swing.JDialog {
 
         txtCodigo.setEditable(false);
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCidade, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codigoCidade}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCidade, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeCidade}"), txtNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         cbxUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCidade, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.ufCidade}"), cbxUF, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout abaDadosLayout = new javax.swing.GroupLayout(abaDados);
         abaDados.setLayout(abaDadosLayout);
