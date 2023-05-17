@@ -6,6 +6,7 @@
 package visual;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.Cidade;
 import modelo.DAOCidade;
 
@@ -22,6 +23,7 @@ public class FormCidade extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         atualizaTabela();
+        trataEdicao(false);
     }
     
     public void atualizaTabela(){
@@ -32,6 +34,46 @@ public class FormCidade extends javax.swing.JDialog {
             tblCidade.setRowSelectionInterval(linha, linha);
             tblCidade.scrollRectToVisible(tblCidade.getCellRect(linha, linha, true));
         }
+    }
+    public boolean validaCampos(){
+        if(!(txtNome.getText().length() > 0)){
+            JOptionPane.showMessageDialog(null,"Informe o Nome da Cidade !");
+            txtNome.requestFocus();
+            return false;
+        }
+        
+        if(!(cbxUF.getSelectedIndex() >= 0)){
+            JOptionPane.showMessageDialog(null,"Selecione uma UF !");
+            cbxUF.requestFocus();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void trataEdicao(boolean editando){
+        btnCancelar.setEnabled(editando);
+        btnSalvar.setEnabled(editando);
+        btnEditar.setEnabled(!editando);
+        int linha = listCidade.size() -1;
+        if(linha<0){
+            btnEditar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+            txtCodigo.setText("");
+            txtNome.setText("");
+        } else {
+          btnExcluir.setEnabled(!editando);
+        }
+        btnNovo.setEnabled(!editando);
+        btnFechar.setEnabled(!editando);
+        btnPrimeiro.setEnabled(!editando);
+        btnAnterior.setEnabled(!editando);
+        btnProximo.setEnabled(!editando);
+        btnUltimo.setEnabled(!editando);
+        
+        txtNome.setEnabled(editando);
+        cbxUF.setEnabled(editando);
+        tblCidade.setEnabled(editando);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,18 +161,38 @@ public class FormCidade extends javax.swing.JDialog {
         pnlAbas.addTab("Listagem", abaListagem);
 
         pnlAcoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
-        pnlAcoes.setLayout(new java.awt.GridLayout());
+        pnlAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
         pnlAcoes.add(btnNovo);
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         pnlAcoes.add(btnEditar);
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         pnlAcoes.add(btnCancelar);
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
         pnlAcoes.add(btnSalvar);
 
         btnExcluir.setText("Excluir");
@@ -235,6 +297,39 @@ public class FormCidade extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose(); // fecha a janela
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        trataEdicao(true);
+        listCidade.add((Cidade) new Cidade()); //cria um objeto e uma linha na tabela;
+        int linha = listCidade.size()-1;
+        tblCidade.setRowSelectionInterval(linha, linha); //seleciona a linha
+        txtNome.requestFocus(); // caixa de texto nome recebe o foco
+        
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        if(validaCampos()){
+            trataEdicao(false);
+            int linhaSelecionada = tblCidade.getSelectedRow(); //pegar linha selecionada
+            Cidade objCidade = listCidade.get(linhaSelecionada); //criar referencia para pegar o objeto que foi criado em novo
+            objDAOCidade.salvar(objCidade);
+            atualizaTabela();
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        trataEdicao(true);
+        txtNome.requestFocus();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        trataEdicao(false);
+        atualizaTabela();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
