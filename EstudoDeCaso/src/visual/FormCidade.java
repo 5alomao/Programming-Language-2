@@ -118,15 +118,35 @@ public class FormCidade extends javax.swing.JDialog {
         pnlNavegacao.setLayout(new java.awt.GridLayout(1, 0));
 
         btnPrimeiro.setText("Primeiro");
+        btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeiroActionPerformed(evt);
+            }
+        });
         pnlNavegacao.add(btnPrimeiro);
 
         btnProximo.setText("Próximo");
+        btnProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProximoActionPerformed(evt);
+            }
+        });
         pnlNavegacao.add(btnProximo);
 
         btnAnterior.setText("Anterior");
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
+            }
+        });
         pnlNavegacao.add(btnAnterior);
 
         btnUltimo.setText("Último");
+        btnUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimoActionPerformed(evt);
+            }
+        });
         pnlNavegacao.add(btnUltimo);
 
         btnFechar.setText("Fechar");
@@ -224,13 +244,13 @@ public class FormCidade extends javax.swing.JDialog {
             .addGroup(abaDadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                     .addGroup(abaDadosLayout.createSequentialGroup()
-                        .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(abaDadosLayout.createSequentialGroup()
                                 .addComponent(lblCidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNome))
                             .addGroup(abaDadosLayout.createSequentialGroup()
                                 .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCodigo)
@@ -330,6 +350,39 @@ public class FormCidade extends javax.swing.JDialog {
         trataEdicao(false);
         atualizaTabela();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
+        // TODO add your handling code here:
+        tblCidade.setRowSelectionInterval(0, 0);
+        tblCidade.scrollRectToVisible(tblCidade.getCellRect(0, 0, true));
+    }//GEN-LAST:event_btnPrimeiroActionPerformed
+
+    private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
+        // TODO add your handling code here:
+        int linha = tblCidade.getSelectedRow();
+        if((linha+1)<=(tblCidade.getRowCount())-1){
+        linha++;
+        }
+        tblCidade.setRowSelectionInterval(linha, linha);
+        tblCidade.scrollRectToVisible(tblCidade.getCellRect(linha, 0, true));
+    }//GEN-LAST:event_btnProximoActionPerformed
+
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        // TODO add your handling code here:
+        int linha = tblCidade.getSelectedRow();
+        if((linha-1)>=0){
+        linha--;
+        }
+        tblCidade.setRowSelectionInterval(linha, linha);
+        tblCidade.scrollRectToVisible(tblCidade.getCellRect(linha, 0, true));
+    }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
+        // TODO add your handling code here:
+        int linha = tblCidade.getRowCount()-1;
+        tblCidade.setRowSelectionInterval(linha, linha);
+        tblCidade.scrollRectToVisible(tblCidade.getCellRect(linha, 0, true));
+    }//GEN-LAST:event_btnUltimoActionPerformed
 
     /**
      * @param args the command line arguments
