@@ -216,6 +216,11 @@ public class FormCidade extends javax.swing.JDialog {
         pnlAcoes.add(btnSalvar);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         pnlAcoes.add(btnExcluir);
 
         lblCodigo.setText("Código:");
@@ -383,6 +388,20 @@ public class FormCidade extends javax.swing.JDialog {
         tblCidade.setRowSelectionInterval(linha, linha);
         tblCidade.scrollRectToVisible(tblCidade.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnUltimoActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int opcao= JOptionPane.showOptionDialog(null, "Confirmar exclusão?",
+        "Pergunta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, 
+        null,new String[]{"Sim","Não"},"Sim");
+        if(opcao==0){
+        int linhaSelecionada = tblCidade.getSelectedRow();
+        Cidade objCidade = listCidade.get(linhaSelecionada);
+        objDAOCidade.remover(objCidade);
+        atualizaTabela();
+        trataEdicao(false);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
