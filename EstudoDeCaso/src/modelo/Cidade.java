@@ -60,6 +60,8 @@ public class Cidade implements Serializable { //Serializable possibilita a persi
         return true;
     }
     
-    
-    
+    @Override
+    public String toString(){
+        return nomeCidade;
+    }
 }
