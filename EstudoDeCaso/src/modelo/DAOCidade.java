@@ -1,10 +1,30 @@
 package modelo;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class DAOCidade { //Data Acess Object (DAO)
     public List<Cidade> getLista(){
-        return Dados.listaCidade;
+        String sql = "select * from cidade";
+        List<Cidade> listaCidade = new ArrayList<>();
+        try{
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Cidade objCidade = new Cidade();
+                objCidade.setCodigoCidade(rs.getInt("codCidade"));
+                objCidade.setNomeCidade(rs.getString("nome"));
+                objCidade.setUfCidade(rs.getString("uf"));
+                listaCidade.add(objCidade);
+            }
+        }catch(SQLException exception){
+            JOptionPane.showMessageDialog(null, "Erro de SQL: "+exception.getMessage());
+        }
+        return listaCidade;
     }
     
     public boolean salvar(Cidade obj){
