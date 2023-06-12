@@ -22,7 +22,7 @@ public class DAOCidade { //Data Acess Object (DAO)
                 listaCidade.add(objCidade); 
             }
         }catch(SQLException exception){
-            JOptionPane.showMessageDialog(null, "Erro de SQL: "+exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro de SQL no getLista() do DAOCidade: "+exception.getMessage());
         }
         return listaCidade;
     }
@@ -90,6 +90,24 @@ public class DAOCidade { //Data Acess Object (DAO)
         }
     }
     
-    
+    public Cidade localizar(Integer codBusca){ //método para FK
+        String sql = "select * from cidade where codCidade = ?";
+        Cidade obj = new Cidade();
+        try{
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setInt(1, codBusca); //1 = primeiro ? = codCidade
+            ResultSet rs = pst.executeQuery();
+           while(rs.next()){
+                obj.setCodigoCidade(rs.getInt("codCidade"));
+                obj.setNomeCidade(rs.getString("nome"));
+                obj.setUfCidade(rs.getString("uf"));
+                return obj;
+            } 
+        }catch(SQLException e){
+                JOptionPane.showMessageDialog
+            (null,"Erro de SQL Localizar"+e.getMessage());
+        }
+            return null;
+        }
     
 }
