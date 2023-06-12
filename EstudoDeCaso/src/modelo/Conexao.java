@@ -30,7 +30,7 @@ public class Conexao {
                 System.out.println("Erro de conexão: "+ exception.getMessage());
             }
         }
-        return null;
+        return connect;
     }
     
     //Método para passar os camandos SQL - Insert, Delete, Update, Select
