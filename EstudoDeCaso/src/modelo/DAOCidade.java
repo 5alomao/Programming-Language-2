@@ -64,14 +64,32 @@ public class DAOCidade { //Data Acess Object (DAO)
         }
         return false;
     }
+    public boolean remover(Cidade obj) {
+        String sql = "delete from cidade where codCidade = ?"; // ? = valores do formulário
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql); // passando comando sql pra conexão
+            pst.setInt(1, obj.getCodigoCidade()); // 1 = primeiro ? = codCidade
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Cidade removida");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Cidade não removida");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL no remover do DAOCidade" + e.getMessage());
+        }
+        return false;
+    }
     
     public boolean salvar(Cidade obj) {
         if (obj.getCodigoCidade() == null) {
             return incluir(obj);
         } else {
-            //return alterar(obj);
-            return true;
+            return alterar(obj);
         }
     }
+    
+    
     
 }
