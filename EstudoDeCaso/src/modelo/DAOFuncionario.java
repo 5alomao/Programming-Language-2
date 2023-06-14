@@ -1,6 +1,5 @@
 package modelo;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,8 +45,8 @@ public class DAOFuncionario { //Data Acess Object (DAO)
             PreparedStatement pst = Conexao.getPreparedStatement(sql); // passando comando sql pra conexão
             pst.setString(1, obj.getNomeFuncionario()); // 1 = primeira ? = nome
             pst.setDouble(2, obj.getSalarioFuncionario()); // 2 = segunda ? = salario
-            //pst.setDate(3, obj.getNascimentoFormatado()); // 3 = segunda ? = nascimento
-            //pst.setInt(4, obj.getObjCidade()); // 4 = segunda ? = objCidade
+            pst.setDate(3, new java.sql.Date(obj.getNascimentoFuncionario().getTimeInMillis())); // 3 = terceira ? = nascimento
+            pst.setInt(4, obj.getObjCidade().getCodigoCidade()); // 4 = quarta ? = objCidade
             if (pst.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Funcionario incluido");
                 return true;
@@ -61,22 +60,24 @@ public class DAOFuncionario { //Data Acess Object (DAO)
         return false;
     }
     
-    public boolean alterar(Cidade obj) {
-        String sql = "update cidade set nome = ?, uf = ? where codCidade = ?"; // ? = valores do formulário
+    public boolean alterar(Funcionario obj) {
+        String sql = "update funcionario set nome = ?, salario = ?, nascimento = ?, objCidade = ? where codFuncionario = ?"; // ? = valores do formulário
         try {
             PreparedStatement pst = Conexao.getPreparedStatement(sql); // passando comando sql pra conexão
-            pst.setString(1, obj.getNomeCidade()); // 1 = primeira ? = nome
-            pst.setString(2, obj.getUfCidade()); // 2 = segunda ? = uf
-            pst.setInt(3, obj.getCodigoCidade()); // 3 = terceiro ? = codCidade
+            pst.setString(1, obj.getNomeFuncionario()); // 1 = primeira ? = nome
+            pst.setDouble(2, obj.getSalarioFuncionario()); // 2 = segunda ? = salario
+            pst.setDate(3, new java.sql.Date(obj.getNascimentoFuncionario().getTimeInMillis())); // 3 = terceira ? = nascimento
+            pst.setInt(4, obj.getObjCidade().getCodigoCidade()); // 4 = quarta ? = objCidade
+            pst.setInt(5, obj.getCodigoFuncionario()); // 5 = quinto ? = codFuncionario para alterar
             if (pst.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Cidade alterada");
+                JOptionPane.showMessageDialog(null, "Funcionario alterado");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "Cidade não alterada");
+                JOptionPane.showMessageDialog(null, "Funcionario não alterado");
                 return false;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro de SQL no alterar do DAOCidade" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro de SQL no alterar do DAOFuncionario" + e.getMessage());
         }
         return false;
     }
@@ -84,22 +85,22 @@ public class DAOFuncionario { //Data Acess Object (DAO)
         String sql = "delete from funcionario where codFuncionario = ?"; // ? = valores do formulário
         try {
             PreparedStatement pst = Conexao.getPreparedStatement(sql); // passando comando sql pra conexão
-            pst.setInt(1, obj.getCodigoCidade()); // 1 = primeiro ? = codCidade
+            pst.setInt(1, obj.getCodigoFuncionario()); // 1 = primeiro ? = codCidade
             if (pst.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Cidade removida");
+                JOptionPane.showMessageDialog(null, "Funcionario removido");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "Cidade não removida");
+                JOptionPane.showMessageDialog(null, "Funcionario não removido");
                 return false;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro de SQL no remover do DAOCidade" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro de SQL no remover do DAOFuncionario" + e.getMessage());
         }
         return false;
     }
     
-    public boolean salvar(Cidade obj) {
-        if (obj.getCodigoCidade() == null) {
+    public boolean salvar(Funcionario obj) {
+        if (obj.getCodigoFuncionario()== null) {
             return incluir(obj);
         } else {
             return alterar(obj);

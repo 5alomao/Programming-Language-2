@@ -105,7 +105,7 @@ public class DAOCidade { //Data Acess Object (DAO)
             } 
         }catch(SQLException e){
                 JOptionPane.showMessageDialog
-            (null,"Erro de SQL Localizar"+e.getMessage());
+            (null,"Erro de SQL Localizar DAOCidade"+e.getMessage());
         }
             return null;
         }
